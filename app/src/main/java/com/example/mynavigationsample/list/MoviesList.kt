@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.madseminarthreesolution.addNew.AddNewActivity
+import com.example.mynavigationsample.addNew.AddNewActivity
 import com.example.mynavigationsample.list.ListViewModel
 import com.example.mynavigationsample.models.Movie
 

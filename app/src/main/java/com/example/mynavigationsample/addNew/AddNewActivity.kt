@@ -1,4 +1,4 @@
-package com.example.madseminarthreesolution.addNew
+package com.example.mynavigationsample.addNew
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,16 +8,12 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.mynavigationsample.addNew.AddNewView
 import com.example.mynavigationsample.ui.theme.MyNavigationSampleTheme
 
 class AddNewActivity : ComponentActivity() {
 
-    private lateinit var viewModel: AddNewViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = AddNewViewModel()
 
         setContent {
             MyNavigationSampleTheme {
