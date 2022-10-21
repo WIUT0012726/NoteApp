@@ -22,13 +22,15 @@ import com.example.mynavigationsample.R
 fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     val context = LocalContext.current
 
+    val name = remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.White)
             .padding(16.dp)
     ) {
-        NameInput()
+        NameInput(name = name.value, onNameChange = { name.value = it })
         Spacer(Modifier.height(16.dp))
         DescriptionInput()
         Spacer(Modifier.height(16.dp))
@@ -46,16 +48,14 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
 
 
 @Composable
-private fun NameInput() {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
-
+private fun NameInput(name: String, onNameChange: (String) -> Unit) {
     TextField(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.LightGray),
-        value = text,
+        value = name,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        onValueChange = { text = it },
+        onValueChange = { onNameChange(it) },
         label = {
             Text(stringResource(id = R.string.add_new_name_input_hint))
         }
