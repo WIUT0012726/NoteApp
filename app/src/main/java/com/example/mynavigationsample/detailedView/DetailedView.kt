@@ -56,7 +56,7 @@ private fun Name(name: String) {
 }
 
 @Composable
-private fun Budget(budget: Int) {
+private fun Budget(budget: String) {
     Text(
         modifier = Modifier.padding(bottom = 3.dp),
         text = stringResource(id = R.string.detailed_view_budget_label, budget),

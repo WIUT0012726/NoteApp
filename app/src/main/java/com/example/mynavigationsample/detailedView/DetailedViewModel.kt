@@ -10,7 +10,7 @@ class DetailedViewModel : ViewModel() {
                 "Mad Max",
                 "Guys killing each other in Australia",
                 listOf("Tom Hardy", "Charliz Theron"),
-                350
+                "350"
             )
     }
 }

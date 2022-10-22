@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,12 +47,12 @@ class MainActivity : ComponentActivity() {
                         BottomNavigationBar(
                             items = listOf(
                                 BottomNavItem(
-                                    name = "Movies",
+                                    name = stringResource(id = R.string.navigation_movies_title),
                                     route = "moviesList",
                                     icon = Icons.Default.List
                                 ),
                                 BottomNavItem(
-                                    name = "Settings",
+                                    name = stringResource(id = R.string.navigation_settings_title),
                                     route = "settings",
                                     icon = Icons.Default.Settings
                                 )

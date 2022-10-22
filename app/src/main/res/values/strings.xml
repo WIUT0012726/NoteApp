@@ -3,7 +3,7 @@
     <string name="movies_tab_title">Movies List</string>
     <string name="settings_tab_title">Settings</string>
 
-    <string name="detailed_view_budget_label">Budget: \u0024%1$d million </string>
+    <string name="detailed_view_budget_label">Budget: \u0024%1$s million </string>
     <string name="add_new_save_button_text">Save</string>
     <string name="add_new_name_input_hint">Name</string>
     <string name="add_new_description_input_hint">Description</string>
@@ -11,4 +11,7 @@
     <string name="add_new_name_budget_hint">Budget</string>
 
     <string name="list_add_new_text">Add new</string>
+
+    <string name="navigation_movies_title">Movies</string>
+    <string name="navigation_settings_title">Settings</string>
 </resources>
