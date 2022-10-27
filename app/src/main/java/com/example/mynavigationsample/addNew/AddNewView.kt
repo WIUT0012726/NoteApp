@@ -15,8 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.core.text.isDigitsOnly
 import com.example.madseminarthreesolution.addNew.AddNewViewModel
 import com.example.mynavigationsample.R
+import com.example.mynavigationsample.models.Movie
 
 @Composable
 fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
@@ -41,10 +43,13 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
         Spacer(Modifier.height(16.dp))
         BudgetInput(budget = budget.value, onBudgetChange = { budget.value = it })
         Spacer(Modifier.height(16.dp))
+
+        val validationMsg = stringResource(id = R.string.add_new_validation_msg)
         AddNewButton {
-//            if (isInputValid()) //todo
+            if (isInputValid(name.value, description.value, actors.value, budget.value))
 //            viewModel.saveNewMovieToRemoteDb(null)
-            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+                else
+            Toast.makeText(context, validationMsg, Toast.LENGTH_SHORT).show()
         }
     }
 }
@@ -131,8 +136,15 @@ private fun AddNewButton(onClick: () -> Unit) {
     }
 }
 
-//    private fun isInputValid(): Boolean {
-//todo implement
-//        if ()
-//        return true
-//    }
+private fun isInputValid(
+    name: String,
+    description: String,
+    actors: String,
+    budget: String
+): Boolean {
+    if (name.isBlank() || description.isBlank() || actors.isBlank()) return false
+
+    if (budget.isBlank() || !budget.isDigitsOnly()) return false
+
+    return true
+}
