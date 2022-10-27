@@ -23,6 +23,9 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     val context = LocalContext.current
 
     val name = remember { mutableStateOf("") }
+    val description = remember { mutableStateOf("") }
+    val actors = remember { mutableStateOf("") }
+    val budget = remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -32,11 +35,11 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     ) {
         NameInput(name = name.value, onNameChange = { name.value = it })
         Spacer(Modifier.height(16.dp))
-        DescriptionInput()
+        DescriptionInput(description = description.value, onDescriptionChange = { description.value = it })
         Spacer(Modifier.height(16.dp))
-        ActorsInput()
+        ActorsInput(actors = actors.value, onActorsChange = { actors.value = it })
         Spacer(Modifier.height(16.dp))
-        BudgetInput()
+        BudgetInput(budget = budget.value, onBudgetChange = { budget.value = it })
         Spacer(Modifier.height(16.dp))
         AddNewButton {
 //            if (isInputValid()) //todo
@@ -64,17 +67,15 @@ private fun NameInput(name: String, onNameChange: (String) -> Unit) {
 
 
 @Composable
-private fun DescriptionInput() {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
-
+private fun DescriptionInput(description: String, onDescriptionChange: (String) -> Unit) {
     TextField(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
             .background(color = Color.LightGray),
-        value = text,
+        value = description,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        onValueChange = { text = it },
+        onValueChange = { onDescriptionChange(it) },
         label = {
             Text(stringResource(id = R.string.add_new_description_input_hint))
         }
@@ -82,17 +83,15 @@ private fun DescriptionInput() {
 }
 
 @Composable
-private fun ActorsInput() {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
-
+private fun ActorsInput(actors: String, onActorsChange: (String) -> Unit) {
     TextField(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
             .background(color = Color.LightGray),
-        value = text,
+        value = actors,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-        onValueChange = { text = it },
+        onValueChange = { onActorsChange(it) },
         label = {
             Text(stringResource(id = R.string.add_new_actors_input_hint))
         }
@@ -100,16 +99,14 @@ private fun ActorsInput() {
 }
 
 @Composable
-private fun BudgetInput() {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
-
+private fun BudgetInput(budget: String, onBudgetChange: (String) -> Unit) {
     TextField(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Color.LightGray),
-        value = text,
+        value = budget,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        onValueChange = { text = it },
+        onValueChange = { onBudgetChange(it) },
         label = {
             Text(stringResource(id = R.string.add_new_name_budget_hint))
         }
