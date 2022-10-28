@@ -9,6 +9,7 @@
     <string name="add_new_description_input_hint">Description</string>
     <string name="add_new_actors_input_hint">Actors comma separated</string>
     <string name="add_new_name_budget_hint">Budget</string>
+    <string name="add_new_validation_msg">All fields are compulsory and budget must be digits only</string>
 
     <string name="list_add_new_text">Add new</string>
 
