@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.MovieService
-import com.example.mynavigationsample.network.MyResponse
+import com.example.mynavigationsample.network.myResponse.MyItemResponse
 import com.example.mynavigationsample.network.RetrofitInstance
+import com.example.mynavigationsample.network.movie.MovieRequest
+import com.example.mynavigationsample.network.myResponse.MyListResponse
+import com.example.mynavigationsample.utils.Constants
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -20,7 +23,7 @@ class ListViewModel : ViewModel() {
                     .getRetrofitInstance()
                     .create(MovieService::class.java)
 
-                val response: MyResponse<Movie> = retrofitInstance.getAllMovies("00001428")
+                val response: MyListResponse<Movie> = retrofitInstance.getAllMovies("00001428")
                 val movies = response.data
 
                 if (movies != null) {
@@ -34,7 +37,31 @@ class ListViewModel : ViewModel() {
             }
         }
 
+
         return emptyList() //todo
 
+    }
+
+    fun deleteOneMovieById(){
+        viewModelScope.launch {
+            try {
+                val retrofitInstance = RetrofitInstance
+                    .getRetrofitInstance()
+                    .create(MovieService::class.java)
+
+                val response: MyItemResponse<Unit> = retrofitInstance.deleteOneMovieById(
+                    "36",
+                    Constants.STUDENT_ID
+                )
+
+                Log.d("Update_response", response.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun deleteAllMovies() {
+        //todo
     }
 }
