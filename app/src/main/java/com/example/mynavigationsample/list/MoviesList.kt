@@ -30,6 +30,8 @@ fun MoviesList(
     viewModel: ListViewModel = ListViewModel()
 ) {
 
+    viewModel.getListOfMoviesFromRemoteDb() //todo just a test call for debugging purposes, to be removed later
+
     val context = LocalContext.current
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -41,9 +43,9 @@ fun MoviesList(
                 )
                 .padding(0.dp, 0.dp, 0.dp, 50.dp),
         ) {
-            items(items = viewModel.getListOfMoviesFromRemoteDb(), itemContent = { item ->
-                MovieItem(movie = item, onMovieClick)
-            })
+//            items(items = viewModel.getListOfMoviesFromRemoteDb(), itemContent = { item ->
+//                MovieItem(movie = item, onMovieClick)
+//            })
         }
 
         FloatingActionButton(
