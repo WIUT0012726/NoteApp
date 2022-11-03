@@ -1,9 +1,13 @@
 package com.example.mynavigationsample.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Movie(
+    @SerializedName("id")
     val id: String,
+    @SerializedName("title")
     val name: String,
-    val description: String,
+    @SerializedName("description")
     val actors: List<String>,
     val budget: String
 )
