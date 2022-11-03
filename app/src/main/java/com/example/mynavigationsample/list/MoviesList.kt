@@ -10,6 +10,8 @@ import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,9 +31,10 @@ fun MoviesList(
     onMovieClick: (String) -> Unit = {},
     viewModel: ListViewModel = ListViewModel()
 ) {
-
     val context = LocalContext.current
     Box(modifier = Modifier.fillMaxSize()) {
+
+        val movies by viewModel.moviesLiveData.observeAsState()
 
         LazyColumn(
             modifier = Modifier
@@ -41,9 +44,11 @@ fun MoviesList(
                 )
                 .padding(0.dp, 0.dp, 0.dp, 50.dp),
         ) {
-            items(items = viewModel.getListOfMoviesFromRemoteDb(), itemContent = { item ->
-                MovieItem(movie = item, onMovieClick)
-            })
+            movies?.let {
+                items(items = it.toList(), itemContent = { item ->
+                    MovieItem(movie = item, onMovieClick)
+                })
+            }
         }
 
         FloatingActionButton(
