@@ -8,6 +8,7 @@ data class Movie(
     @SerializedName("title")
     val name: String,
     @SerializedName("description")
+    val description: String,
     val actors: List<String>,
     val budget: String
 )
