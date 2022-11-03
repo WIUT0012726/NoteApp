@@ -22,12 +22,12 @@ interface MovieService {
         @Body movieRequest: MovieRequest
     ): MyItemResponse<Unit>
 
-//    @PUT("records/{record_id}") //todo waiting for Hurshid
-//    suspend fun updateOneMovieById(
-//        @Path("record_id") record_id: String,
-//        @Query("student_id") student_id: String,
-//        movie: Movie
-//    ): MyItemResponse<Unit>
+    @PUT("records/{record_id}")
+    suspend fun updateOneMovieById(
+        @Path("record_id") record_id: String,
+        @Query("student_id") student_id: String,
+        movie: Movie
+    ): MyItemResponse<Unit>
 
     @DELETE("records/{record_id}")
     suspend fun deleteOneMovieById(

@@ -15,6 +15,8 @@ import java.lang.Exception
 
 class ListViewModel : ViewModel() {
 
+    //todo list wrapped inside the livedata
+
     fun getListOfMoviesFromRemoteDb(): List<Movie> {
 
         viewModelScope.launch {
