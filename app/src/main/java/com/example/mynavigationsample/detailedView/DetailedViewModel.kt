@@ -8,6 +8,7 @@ import com.example.mynavigationsample.network.MovieService
 import com.example.mynavigationsample.network.MyItemResponse
 import com.example.mynavigationsample.network.MyResponse
 import com.example.mynavigationsample.network.RetrofitInstance
+import com.example.mynavigationsample.utils.Constants
 import kotlinx.coroutines.launch
 
 class DetailedViewModel : ViewModel() {
@@ -18,7 +19,7 @@ class DetailedViewModel : ViewModel() {
                     .getRetrofitInstance()
                     .create(MovieService::class.java)
                 val response: MyItemResponse<Movie> =
-                    retrofitInstance.getOneMovieById(movieId,"00001428")
+                    retrofitInstance.getOneMovieById(movieId,Constants.STUDENT_ID)
                 val movie = response.data
                 if (movie != null) {
                         Log.d("One_movie_item: ", movie.toString())

@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.MovieService
+import com.example.mynavigationsample.network.MyListResponse
 import com.example.mynavigationsample.network.MyResponse
 import com.example.mynavigationsample.network.RetrofitInstance
+import com.example.mynavigationsample.utils.Constants
 import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
@@ -16,8 +18,8 @@ class ListViewModel : ViewModel() {
                 val retrofitInstance = RetrofitInstance
                     .getRetrofitInstance()
                     .create(MovieService::class.java)
-                val response: MyResponse<Movie> =
-                    retrofitInstance.getAllMovies("00001428")
+                val response: MyListResponse<Movie> =
+                    retrofitInstance.getAllMovies(Constants.STUDENT_ID)
                 val movies = response.data
                 if (movies != null) {
                     for (movie in movies){
