@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,30 +19,35 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mynavigationsample.R
 import com.example.mynavigationsample.detailedView.DetailedViewModel
+import com.example.mynavigationsample.models.Movie
 
 @Composable
-fun DetailedView(movieId: String, viewModel: DetailedViewModel = DetailedViewModel()) {
+fun DetailedView(movieId: String, viewModel: DetailedViewModel = DetailedViewModel(movieId)) {
 
-    val movie = viewModel.getMovieByIdFromRemoteDb(movieId)
+    val movie by viewModel.movieLiveData.observeAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(R.color.movie_detailed_view_bg))
-            .padding(16.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.Bottom
+    if (movie != null) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(colorResource(R.color.movie_detailed_view_bg))
+                .padding(16.dp)
         ) {
-            Name(name = movie.name)
-            Spacer(Modifier.weight(1f))
-            Budget(budget = movie.budget)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Name(name = movie!!.name)
+                Spacer(Modifier.weight(1f))
+                Budget(budget = movie!!.budget)
+            }
+            Description(description = movie!!.description)
+            MyDivider()
+            Spacer(Modifier.height(16.dp))
+            if (!movie!!.actors.isNullOrEmpty()) {
+                Actors(actors = movie!!.actors!!)
+            }
         }
-        Description(description = movie.description)
-        MyDivider()
-        Spacer(Modifier.height(16.dp))
-        Actors(actors = movie.actors)
     }
 }
 
