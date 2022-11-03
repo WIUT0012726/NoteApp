@@ -9,6 +9,7 @@ import com.example.mynavigationsample.network.MovieService
 import com.example.mynavigationsample.network.myResponse.MyItemResponse
 import com.example.mynavigationsample.network.RetrofitInstance
 import com.example.mynavigationsample.network.myResponse.MyListResponse
+import com.example.mynavigationsample.network.myResponse.MyResponse
 import com.example.mynavigationsample.utils.Constants
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -44,15 +45,15 @@ class ListViewModel : ViewModel() {
 
     }
 
-     fun deleteOneMovieById() {
+     fun deleteOneMovieById(movieId: String) {
         viewModelScope.launch {
             try {
                 val retrofitInstance = RetrofitInstance
                     .getRetrofitInstance()
                     .create(MovieService::class.java)
 
-                val response: MyItemResponse<Unit> = retrofitInstance.deleteOneMovieById(
-                    "36",
+                val response: MyResponse = retrofitInstance.deleteOneMovieById(
+                    movieId,
                     Constants.STUDENT_ID
                 )
 

@@ -10,6 +10,7 @@
     <string name="add_new_actors_input_hint">Actors comma separated</string>
     <string name="add_new_name_budget_hint">Budget</string>
     <string name="add_new_validation_msg">All fields are compulsory and budget must be digits only</string>
+    <string name="add_new_saved_successfully_msg">Saved successfully</string>
 
     <string name="list_add_new_text">Add new</string>
 

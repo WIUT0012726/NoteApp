@@ -8,6 +8,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -19,6 +20,8 @@ import androidx.core.text.isDigitsOnly
 import com.example.madseminarthreesolution.addNew.AddNewViewModel
 import com.example.mynavigationsample.R
 import com.example.mynavigationsample.models.Movie
+import com.example.mynavigationsample.network.movie.MovieRequest
+import com.example.mynavigationsample.network.myResponse.MyResponse
 
 @Composable
 fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
@@ -28,6 +31,8 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     val description = remember { mutableStateOf("") }
     val actors = remember { mutableStateOf("") }
     val budget = remember { mutableStateOf("") }
+
+    val response by viewModel.movieInsertResponse.observeAsState()
 
     Column(
         modifier = Modifier
@@ -46,8 +51,12 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
 
         val validationMsg = stringResource(id = R.string.add_new_validation_msg)
         AddNewButton {
-            if (isInputValid(name.value, description.value, actors.value, budget.value))
-//            viewModel.saveNewMovieToRemoteDb(null)
+            if (isInputValid(name.value, description.value, actors.value, budget.value)) {
+                viewModel.saveNewMovieToRemoteDb(MovieRequest(name.value, description.value))
+                if (response?.status == "OK") {
+                    Toast.makeText(context, context.getText(R.string.add_new_saved_successfully_msg), Toast.LENGTH_SHORT).show()
+                }
+            }
                 else
             Toast.makeText(context, validationMsg, Toast.LENGTH_SHORT).show()
         }

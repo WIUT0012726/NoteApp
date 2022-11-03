@@ -4,11 +4,14 @@ import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.movie.MovieRequest
 import com.example.mynavigationsample.network.myResponse.MyItemResponse
 import com.example.mynavigationsample.network.myResponse.MyListResponse
+import com.example.mynavigationsample.network.myResponse.MyResponse
 import retrofit2.http.*
 
 interface MovieService {
     @GET("records/all")
-    suspend fun getAllMovies(@Query("student_id") student_id: String): MyListResponse<Movie>
+    suspend fun getAllMovies(
+        @Query("student_id") student_id: String
+    ): MyListResponse<Movie>
 
     @GET("records/{record_id}")
     suspend fun getOneMovieById(
@@ -20,23 +23,23 @@ interface MovieService {
     suspend fun insertNewMovie(
         @Query("student_id") student_id: String,
         @Body movieRequest: MovieRequest
-    ): MyItemResponse<Unit>
+    ): MyResponse
 
     @PUT("records/{record_id}")
     suspend fun updateOneMovieById(
         @Path("record_id") record_id: String,
         @Query("student_id") student_id: String,
         movie: Movie
-    ): MyItemResponse<Unit>
+    ): MyResponse
 
     @DELETE("records/{record_id}")
     suspend fun deleteOneMovieById(
         @Path("record_id") record_id: String,
         @Query("student_id") student_id: String
-    ): MyItemResponse<Unit>
+    ): MyResponse
 
     @DELETE("records/all")
     suspend fun deleteAllMovies(
         @Query("student_id") student_id: String
-    ): MyItemResponse<Unit> //todo not tested yet
+    ): MyResponse //todo not tested yet
 }
