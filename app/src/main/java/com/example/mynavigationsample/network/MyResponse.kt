@@ -2,13 +2,11 @@ package com.example.mynavigationsample.network
 
 import com.google.gson.annotations.SerializedName
 
-data class MyResponse<T>(
+open class MyResponse () {
     @SerializedName("code")
-    val code: String,
+    val code: String = ""
     @SerializedName("status")
-    val status: String,
+    val status: String = ""
     @SerializedName("message")
-    val message: String,
-    @SerializedName("data")
-    val data: List<T>?,
-)
+    val message: String = ""
+}
