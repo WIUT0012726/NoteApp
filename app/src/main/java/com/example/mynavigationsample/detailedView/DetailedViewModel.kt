@@ -26,7 +26,6 @@ class DetailedViewModel(movieId: String) : ViewModel() {
     init {
         getMovieByIdFromRemoteDb(movieId)
 //        deleteOneMovieById("109")
-//        editMovieById("109")
     }
 
     fun getMovieByIdFromRemoteDb(movieId: String) {
@@ -53,14 +52,14 @@ class DetailedViewModel(movieId: String) : ViewModel() {
         }
     }
 
-    fun editMovieById(movie: Movie) {
+    fun editMovieById(movieId: String, movieRequest: MovieRequest) {
         viewModelScope.launch {
             try {
 
                 val response: MyResponse = RetrofitInstance.movieService.updateOneMovieById(
-                    movie.id,
+                    movieId,
                     Constants.STUDENT_ID,
-                    MovieRequest(movie.name, movie.description)
+                    movieRequest
                 )
 
                 Log.d("Update_response", response.toString())

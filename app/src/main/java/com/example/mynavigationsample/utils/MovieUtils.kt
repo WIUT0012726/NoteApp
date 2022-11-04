@@ -14,3 +14,9 @@ fun extractListOfActorsFromResponse(
 
     return myActors
 }
+
+fun parseActorsFromInput(
+    actorsInput: String
+): List<String> {
+    return actorsInput.split(",")
+}

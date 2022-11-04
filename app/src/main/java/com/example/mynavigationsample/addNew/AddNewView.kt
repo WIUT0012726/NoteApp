@@ -22,6 +22,7 @@ import com.example.mynavigationsample.R
 import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.movie.MovieRequest
 import com.example.mynavigationsample.network.myResponse.MyResponse
+import com.example.mynavigationsample.utils.parseActorsFromInput
 
 @Composable
 fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
@@ -52,7 +53,7 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
         val validationMsg = stringResource(id = R.string.add_new_validation_msg)
         AddNewButton {
             if (isInputValid(name.value, description.value, actors.value, budget.value)) {
-                viewModel.saveNewMovieToRemoteDb(MovieRequest(name.value, description.value))
+                viewModel.saveNewMovieToRemoteDb(MovieRequest(name.value, description.value, parseActorsFromInput(actors.value), budget.value))
                 if (response?.status == "OK") {
                     Toast.makeText(context, context.getText(R.string.add_new_saved_successfully_msg), Toast.LENGTH_SHORT).show()
                 }

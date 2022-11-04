@@ -1,6 +1,5 @@
 package com.example.mynavigationsample.network
 
-import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.movie.MovieRequest
 import com.example.mynavigationsample.network.movie.MovieResponse
 import com.example.mynavigationsample.network.myResponse.MyItemResponse
@@ -30,7 +29,7 @@ interface MovieService {
     suspend fun updateOneMovieById(
         @Path("record_id") record_id: String,
         @Query("student_id") student_id: String,
-        movieRequest: MovieRequest
+        @Body movieRequest: MovieRequest
     ): MyResponse
 
     @DELETE("records/{record_id}")

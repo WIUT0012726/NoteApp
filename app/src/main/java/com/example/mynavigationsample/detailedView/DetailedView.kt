@@ -1,7 +1,8 @@
-package com.example.mynavigationsample.list
+package com.example.mynavigationsample.detailedView
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,8 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mynavigationsample.R
-import com.example.mynavigationsample.detailedView.DetailedViewModel
-import com.example.mynavigationsample.models.Movie
+import com.example.mynavigationsample.network.movie.MovieRequest
 
 @Composable
 fun DetailedView(movieId: String, viewModel: DetailedViewModel = DetailedViewModel(movieId)) {
@@ -47,6 +47,13 @@ fun DetailedView(movieId: String, viewModel: DetailedViewModel = DetailedViewMod
             if (!movie!!.actors.isNullOrEmpty()) {
                 Actors(actors = movie!!.actors!!)
             }
+//            EditButton {
+//                viewModel.editMovieById(movieId, MovieRequest(
+//                    movie!!.name,
+//                    "test desc",
+//                    movie!!.actors,
+//                    movie!!.budget))
+//            }
         }
     }
 }
@@ -114,3 +121,20 @@ private fun MyDivider() {
         color = Color.LightGray
     )
 }
+
+//@Composable
+//private fun EditButton(onClick: () -> Unit) {
+//    Button(
+//        onClick = {
+//            onClick()
+//        },
+//        modifier = Modifier
+//            .width(150.dp)
+//            .height(75.dp)
+//            .padding(vertical = 16.dp)
+//    ) {
+//        Text(
+//            text = stringResource(id = R.string.edit_movie_button_text)
+//        )
+//    }
+//}
