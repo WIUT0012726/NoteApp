@@ -15,27 +15,11 @@ import kotlinx.coroutines.launch
 
 class AddNewViewModel : ViewModel() {
 
-    val movieInsertResponse: MutableLiveData<MyResponse> by lazy {
-        MutableLiveData<MyResponse>()
-    }
+    //todo use livedata for response value
 
     fun saveNewMovieToRemoteDb(movie: MovieRequest) {
 
-        viewModelScope.launch {
-            try {
-
-                val response: MyResponse = RetrofitInstance.movieService.insertNewMovie(
-                    Constants.STUDENT_ID,
-                    movie
-                )
-
-                movieInsertResponse.value = response
-
-                Log.d("Update_response", response.toString())
-            } catch (e: Exception) {
-
-            }
-        }
+//todo
 
     }
 }

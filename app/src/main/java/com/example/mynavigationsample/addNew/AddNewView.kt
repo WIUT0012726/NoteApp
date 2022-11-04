@@ -33,7 +33,6 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     val actors = remember { mutableStateOf("") }
     val budget = remember { mutableStateOf("") }
 
-    val response by viewModel.movieInsertResponse.observeAsState()
 
     Column(
         modifier = Modifier
@@ -64,14 +63,7 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
                     )
                 )
 
-                if (response?.status == "OK") {
-                    val toast = Toast.makeText(
-                        context,
-                        context.getText(R.string.add_new_saved_successfully_msg),
-                        Toast.LENGTH_SHORT)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
-                }
+                //todo show network response result to the user
             } else {
                 val toast = Toast.makeText(context, validationMsg, Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.CENTER, 0, 0)

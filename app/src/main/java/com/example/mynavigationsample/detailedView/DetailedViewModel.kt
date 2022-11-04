@@ -53,35 +53,10 @@ class DetailedViewModel(movieId: String) : ViewModel() {
     }
 
     fun editMovieById(movieId: String, movieRequest: MovieRequest) {
-        viewModelScope.launch {
-            try {
-
-                val response: MyResponse = RetrofitInstance.movieService.updateOneMovieById(
-                    movieId,
-                    Constants.STUDENT_ID,
-                    movieRequest
-                )
-
-                Log.d("Update_response", response.toString())
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        //todo
     }
 
     fun deleteOneMovieById(movieId: String) {
-        viewModelScope.launch {
-            try {
-
-                val response: MyResponse = RetrofitInstance.movieService.deleteOneMovieById(
-                    movieId,
-                    Constants.STUDENT_ID
-                )
-
-                Log.d("Delete_response", response.toString())
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        //todo
     }
 }
