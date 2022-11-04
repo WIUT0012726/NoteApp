@@ -2,6 +2,7 @@ package com.example.mynavigationsample.network
 
 import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.movie.MovieRequest
+import com.example.mynavigationsample.network.movie.MovieResponse
 import com.example.mynavigationsample.network.myResponse.MyItemResponse
 import com.example.mynavigationsample.network.myResponse.MyListResponse
 import com.example.mynavigationsample.network.myResponse.MyResponse
@@ -11,13 +12,13 @@ interface MovieService {
     @GET("records/all")
     suspend fun getAllMovies(
         @Query("student_id") student_id: String
-    ): MyListResponse<Movie>
+    ): MyListResponse<MovieResponse>
 
     @GET("records/{record_id}")
     suspend fun getOneMovieById(
         @Path("record_id") record_id: String,
         @Query("student_id") student_id: String
-    ): MyItemResponse<Movie>
+    ): MyItemResponse<MovieResponse>
 
     @POST("records")
     suspend fun insertNewMovie(
@@ -41,5 +42,5 @@ interface MovieService {
     @DELETE("records/all")
     suspend fun deleteAllMovies(
         @Query("student_id") student_id: String
-    ): MyResponse //todo not tested yet
+    ): MyResponse
 }
