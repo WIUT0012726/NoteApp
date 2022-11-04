@@ -1,5 +1,6 @@
 package com.example.mynavigationsample.addNew
 
+import android.view.Gravity
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,17 +13,16 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import com.example.madseminarthreesolution.addNew.AddNewViewModel
 import com.example.mynavigationsample.R
-import com.example.mynavigationsample.models.Movie
 import com.example.mynavigationsample.network.movie.MovieRequest
-import com.example.mynavigationsample.network.myResponse.MyResponse
 import com.example.mynavigationsample.utils.parseActorsFromInput
+
 
 @Composable
 fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
@@ -43,7 +43,9 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     ) {
         NameInput(name = name.value, onNameChange = { name.value = it })
         Spacer(Modifier.height(16.dp))
-        DescriptionInput(description = description.value, onDescriptionChange = { description.value = it })
+        DescriptionInput(
+            description = description.value,
+            onDescriptionChange = { description.value = it })
         Spacer(Modifier.height(16.dp))
         ActorsInput(actors = actors.value, onActorsChange = { actors.value = it })
         Spacer(Modifier.height(16.dp))
@@ -53,13 +55,28 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
         val validationMsg = stringResource(id = R.string.add_new_validation_msg)
         AddNewButton {
             if (isInputValid(name.value, description.value, actors.value, budget.value)) {
-                viewModel.saveNewMovieToRemoteDb(MovieRequest(name.value, description.value, parseActorsFromInput(actors.value), budget.value))
+                viewModel.saveNewMovieToRemoteDb(
+                    MovieRequest(
+                        name.value,
+                        description.value,
+                        parseActorsFromInput(actors.value),
+                        budget.value
+                    )
+                )
+
                 if (response?.status == "OK") {
-                    Toast.makeText(context, context.getText(R.string.add_new_saved_successfully_msg), Toast.LENGTH_SHORT).show()
+                    val toast = Toast.makeText(
+                        context,
+                        context.getText(R.string.add_new_saved_successfully_msg),
+                        Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
+            } else {
+                val toast = Toast.makeText(context, validationMsg, Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
             }
-                else
-            Toast.makeText(context, validationMsg, Toast.LENGTH_SHORT).show()
         }
     }
 }
