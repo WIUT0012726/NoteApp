@@ -23,11 +23,8 @@ class AddNewViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val retrofitInstance = RetrofitInstance
-                    .getRetrofitInstance()
-                    .create(MovieService::class.java)
 
-                val response: MyResponse = retrofitInstance.insertNewMovie(
+                val response: MyResponse = RetrofitInstance.movieService.insertNewMovie(
                     Constants.STUDENT_ID,
                     movie
                 )

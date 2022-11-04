@@ -28,6 +28,10 @@ class RetrofitInstance {
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
         }
+
+        val movieService: MovieService = getRetrofitInstance()
+            .create(MovieService::class.java)
+
     }
 
 }

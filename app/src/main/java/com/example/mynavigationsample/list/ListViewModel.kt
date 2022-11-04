@@ -27,11 +27,7 @@ class ListViewModel : ViewModel() {
     fun getListOfMoviesFromRemoteDb() {
         viewModelScope.launch {
             try {
-                val retrofitInstance = RetrofitInstance
-                    .getRetrofitInstance()
-                    .create(MovieService::class.java)
-
-                val response: MyListResponse<Movie> = retrofitInstance.getAllMovies("00001428")
+                val response: MyListResponse<Movie> = RetrofitInstance.movieService.getAllMovies(Constants.STUDENT_ID)
                 val moviesFromResponse = response.data
 
                 if (moviesFromResponse != null) {
@@ -48,16 +44,13 @@ class ListViewModel : ViewModel() {
      fun deleteOneMovieById(movieId: String) {
         viewModelScope.launch {
             try {
-                val retrofitInstance = RetrofitInstance
-                    .getRetrofitInstance()
-                    .create(MovieService::class.java)
 
-                val response: MyResponse = retrofitInstance.deleteOneMovieById(
+                val response: MyResponse = RetrofitInstance.movieService.deleteOneMovieById(
                     movieId,
                     Constants.STUDENT_ID
                 )
 
-                Log.d("Update_response", response.toString())
+                Log.d("Delete_response", response.toString())
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -65,6 +58,17 @@ class ListViewModel : ViewModel() {
     }
 
     fun deleteAllMovies() {
-        //todo
+        viewModelScope.launch {
+            try {
+
+                val response: MyResponse = RetrofitInstance.movieService.deleteAllMovies(
+                    Constants.STUDENT_ID
+                )
+
+                Log.d("Delete_response", response.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }

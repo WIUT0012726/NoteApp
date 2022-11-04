@@ -29,7 +29,7 @@ interface MovieService {
     suspend fun updateOneMovieById(
         @Path("record_id") record_id: String,
         @Query("student_id") student_id: String,
-        movie: Movie
+        movieRequest: MovieRequest
     ): MyResponse
 
     @DELETE("records/{record_id}")
