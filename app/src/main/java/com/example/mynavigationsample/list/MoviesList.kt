@@ -72,7 +72,7 @@ fun MovieItem(movie: Movie, onMovieClick: (String) -> Unit) {
             .fillMaxWidth()
             .padding(15.dp, 10.dp, 15.dp, 0.dp)
             .clickable {
-                onMovieClick(movie.id)
+                onMovieClick(movie.id.toString())
             }
     ) {
         Name(name = movie.name)
