@@ -29,11 +29,11 @@ class AddNewActivity : ComponentActivity() {
     }
 
 
-    @Preview(showBackground = true)
-    @Composable
-    fun DefaultPreview3() {
-        MyNavigationSampleTheme {
-            AddNewView()
-        }
-    }
+//    @Preview(showBackground = true)
+//    @Composable
+//    fun DefaultPreview3() {
+//        MyNavigationSampleTheme {
+//            AddNewView()
+//        }
+//    }
 }

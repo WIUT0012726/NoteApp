@@ -1,5 +1,7 @@
 package com.example.mynavigationsample.addNew
 
+import android.content.Context
+import android.content.Intent
 import android.view.Gravity
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -10,17 +12,23 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.core.text.isDigitsOnly
 import com.example.madseminarthreesolution.addNew.AddNewViewModel
+import com.example.mynavigationsample.MainActivity
 import com.example.mynavigationsample.R
 import com.example.mynavigationsample.network.movie.MovieRequest
+import com.example.mynavigationsample.network.myResponse.MyResponse
 import com.example.mynavigationsample.utils.parseActorsFromInput
 
 
@@ -33,6 +41,9 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
     val actors = remember { mutableStateOf("") }
     val budget = remember { mutableStateOf("") }
 
+    val isProgressVisible = remember { mutableStateOf(false) }
+
+    val response by viewModel.movieInsertResponse.observeAsState()
 
     Column(
         modifier = Modifier
@@ -63,7 +74,8 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
                     )
                 )
 
-                //todo show network response result to the user
+                isProgressVisible.value = true
+
             } else {
                 val toast = Toast.makeText(context, validationMsg, Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.CENTER, 0, 0)
@@ -71,8 +83,34 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
             }
         }
     }
+
+    response?.let { ProgressWidget(response = it, isVisible = isProgressVisible.value, context) }
 }
 
+@Composable
+private fun ProgressWidget(response: MyResponse, isVisible: Boolean, context: Context) {
+    if (isVisible) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent)
+        ) {
+            Text(
+                modifier = Modifier
+                    .background(colorResource(id = R.color.add_new_movie_text_color))
+                    .padding(20.dp)
+                    .align(Alignment.Center),
+                fontSize = 25.sp,
+                text =
+                if (response.status.isEmpty()) stringResource(id = R.string.add_new_in_progress_mgs) //by default status is "", so if it is empty that means network request hasn't returned a response yet
+                else if (response.status == "OK") stringResource(id = R.string.add_new_saved_successfully_msg)
+                else stringResource(id = R.string.add_new_failed_to_save_msg)
+            )
+        }
+
+        context.startActivity(Intent(context, MainActivity::class.java))
+    }
+}
 
 @Composable
 private fun NameInput(name: String, onNameChange: (String) -> Unit) {

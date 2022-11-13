@@ -11,6 +11,8 @@
     <string name="add_new_name_budget_hint">Budget</string>
     <string name="add_new_validation_msg">All fields are compulsory and budget must be digits only</string>
     <string name="add_new_saved_successfully_msg">Saved successfully</string>
+    <string name="add_new_failed_to_save_msg">Failed to save</string>
+    <string name="add_new_in_progress_mgs">In progress</string>
 
     <string name="list_add_new_text">Add new</string>
 
