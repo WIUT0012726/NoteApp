@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addNew.AddNewActivity">
-
+        <activity android:name=".addNew.AddNewActivity"
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
 

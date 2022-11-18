@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.Gravity
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -18,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -50,6 +55,7 @@ fun AddNewView(viewModel: AddNewViewModel = AddNewViewModel()) {
             .fillMaxWidth()
             .background(color = Color.White)
             .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         NameInput(name = name.value, onNameChange = { name.value = it })
         Spacer(Modifier.height(16.dp))

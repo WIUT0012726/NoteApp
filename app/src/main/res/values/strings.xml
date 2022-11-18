@@ -18,6 +18,7 @@
 
     <string name="navigation_movies_title">Movies</string>
     <string name="navigation_settings_title">Settings</string>
+    <string name="cinema_icon_desc">Cinema</string>
 
 <!--    <string name="edit_movie_button_text">Edit</string>-->
 </resources>

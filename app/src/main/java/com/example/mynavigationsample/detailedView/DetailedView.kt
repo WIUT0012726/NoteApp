@@ -1,5 +1,6 @@
 package com.example.mynavigationsample.detailedView
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -47,6 +49,11 @@ fun DetailedView(movieId: String, viewModel: DetailedViewModel = DetailedViewMod
             if (!movie!!.actors.isNullOrEmpty()) {
                 Actors(actors = movie!!.actors!!)
             }
+            Image(
+                painterResource(R.drawable.ic_cinema),
+                stringResource(id = R.string.cinema_icon_desc),
+                modifier = Modifier.align(Alignment.CenterHorizontally).padding(0.dp, 20.dp),
+            )
 //            EditButton {
 //                viewModel.editMovieById(movieId, MovieRequest(
 //                    movie!!.name,
